@@ -1,0 +1,205 @@
+initialize a node server
+npm init 
+
+npm install express mongoose
+
+create index.js file
+write "type" :"module" in package.json file  (we can use import statement)
+write "start": "nodemon index.js" in package.json file.
+
+now go to cloud.mongodb.com
+create cluster
+create new db user
+connect
+
+create .env file
+add mongo connection credentials to env file
+
+npm install dotenv
+make connection to db 
+
+create folder models> file User.js, Video.js, Comment.js and write schema in them.
+
+create folder routes
+create files users.js, videos.js, comments.js, auth.js
+
+
+create folder controller (we will make all CRUD operations in this)
+create files user.js, video.js, comment.js, auth.js 
+
+
+create api for user signup in controller>auth
+api is created but password is not secured, lets secure it 
+npm install bcryptjs
+
+after encrypting password in auth>controller test the api , it will send new user to database
+yes it is workking.
+
+now do error handling.
+we have done simple error handlong that status wil be false on duplicate username and email.
+
+create new file err.js for more specific error handling
+
+----------------------------------------------------------------
+
+lets create for signin
+
+in our db there is hashed password, first we check for the user , we will decrypt the password and match
+
+we have done with username and password valodation in signin in auth>controller 
+
+now we have to create AccessToken for viddeo, comment and all stuff
+npm install jsonwebtoken
+
+const token = jwt.sign({id:user._id}) (it will take id and create hash token and send this token after login process)
+
+make secret key in env file
+send token to User 
+
+to use cookie we need to install cookie-parser
+npm install cookie-parser
+
+now we are able to get user from  correct username and password and also hashed access token in cookie
+this hashed access token includes userid to verify user
+
+now only the problem is then it reveales the password(hashed)
+const {password, ...others} = user._doc;        (this will seperate all other details and password then we will show only others object not password)
+
+now we can sign up andd sign in using username and password
+
+
+-----------------------------------------------------------------------------------
+
+now come to users.js in controllers and name all update, delete, etc
+now come to users.js in routes and create routes to update, delete, get, etc.
+
+we need to verify user first otherwise anyone can update, dele, subscribe etc, so 
+create file verifyToken.js
+
+now come to user.js in controller and compare :id(userid) and jwt id 
+
+now we can update username
+
+-------------------------------------------------------------------------
+
+We have done update, delete, get, subscribe, unsubscribe.
+
+for like dislike video first we have to create video
+
+now come to comment part
+
+Now come to like and dislike part
+
+all are now working 
+
+
+
+
+
+for testing:{
+
+get all videos from my subscriptions:
+localhost:8080/api/videos/sub   (get)
+
+
+video by tag:	(get)
+localhost:8080/api/videos/tags?tags=js
+
+
+search video:	(get)
+localhost:8080/api/videos/search?q=best
+
+
+find a video: 	(get)
+localhost:8080/api/videos/find/6304ad33f5770e5fe59d0049
+
+
+random video:
+localhost:8080/api/videos/random	(get)
+
+
+signin:
+localhost:8080/api/auth/signin	(post)
+{
+  "name": "deepanshu",
+  "password": "12345"
+}
+
+
+signup:
+localhost:8080/api/auth/signup	(post)
+{
+  "name": "deepanshu3",
+  "email": "dpdp3@gmail.com",
+  "password": "12345"
+}
+
+
+delete user:	
+localhost:8080/api/users/idididididididid	(delete)
+
+
+update name:	
+localhost:8080/api/users/idididididididid	(put)
+
+
+subscribe a channel:
+localhost:8080/api/users/sub/idididididididid	(put)
+
+
+Video:
+localhost:8080/api/videos	(post)
+{
+  "title":"Best Video from 3rd user",
+  "desc":"test Description",
+  "imgUrl":"test img",
+  "videoUrl":"test Video"
+}
+
+
+add comment:	(post)
+localhost:8080/api/comments
+{
+  "desc":"this is comment",
+  "videoId":"6304ad5ef5770e5fe59d004c"
+}
+
+
+get comments of a video: 	(get)
+localhost:8080/api/comments/6304ad5ef5770e5fe59d004c
+
+
+like a video:	(put)
+localhost:8080/api/users/like/idididididididid
+
+
+dislike a video:	(put)
+localhost:8080/api/users/dislike/idididididididid
+
+}
+
+
+
+
+---------------------------------------------------------------------
+
+
+now its time to come to ui part, 
+
+add our api to client se we dont need to type full url again and again just end points.
+come to client folder, in package.json file ("proxy":"http://localhost:8080/api")
+
+
+
+
+
+
+
+in auth.js create function googleAuth, when click on google signin button , if user already exist themn it login else it will create a new user.
+
+now it get signed in by google, it will take name, email,and photo from google.
+
+
+
+App is working ....
+

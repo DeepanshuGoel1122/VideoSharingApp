@@ -1,0 +1,12 @@
+MongoDB
+Express
+React
+Node
+Firebase
+
+Redux
+Google Authentication
+
+Password Hash
+Styled Components
+Material Icons

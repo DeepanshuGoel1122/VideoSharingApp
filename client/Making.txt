@@ -1,0 +1,172 @@
+Client Design Youtube Clone
+
+npx create-react-app youtube_clone
+npm install styled-components react-router-dom
+
+First we will create sidebar, then navbar, then content part.
+
+create react component, we will not use html, we use styled components.
+
+create components folder
+create Menu.jsx
+create navbar.jsx 
+
+now style sidebar in app.js container.and menu.jsx 
+add logo and name, add menu items like home and there logo.
+
+
+for icons use material Icons
+npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+
+
+for theme, create folder utils > theme.js 
+add some code in app.js, menu.jsx 
+
+
+now come to navbar
+after styling navbar
+
+create ne folder pages > home.jsx and video.jsx
+now create routes, import react-router-dom in app.js create routes 
+
+
+create Card.jsx in components , it is card with video description and other details.
+show that card from home.jsx
+
+after all styling of card, now add route by using Link.
+
+now we will create video page, this page have video content and recommendations .
+created video frame, channel name subscribe button, now we will create commnts section.
+
+create Comments.jsx
+create comment.jsx
+
+now come to recommendations
+
+after it we will create login page.
+in app.js add one more route to signin
+create new file in pages> Signin.jsx 
+use link to signin buttons to route to signin page 
+
+after making signin page 
+
+UI part is Completed.
+
+
+----------------------------------------------------------
+integrating with server
+
+in package.json file ("proxy":"http://localhost:8080/api")
+
+in home.jsx file use state and use effect
+
+to fetch our data install axios library
+npm install axios
+
+use videos.map and removed all cards, soho card by axiosit should show numbers of cards we have number of videos in db, but it throws an axios error in console,
+it is not going to server port, we need to stop react server, delete package-lock.json and node modules
+rm -r package-lock.json node_modules
+then npm install 
+
+yes its working as expected.
+
+as we have explore button subscriptions button, we have to display videos acccording to them.
+in app.js create routes named trend and sub after home.
+in home.jsx pass {type}
+
+in Menu.jsx <Link to explore button and subscription button
+
+in card.jsx pass the video, change imageUrl, video details with like video.title etc 
+
+For displaying date like (2 days ago/ 1 month ago) we need to install timeago.js library 
+npm install timeago.js 
+
+now we will fetch channel image and channel name details in card as we fetched video details .
+
+
+now lets create useState for signin page.
+by using useState and using onChange we have the data now for signin button to send data
+create function handleLogin
+now button is working in console.log
+
+it might be a problem because we have to use this information in navbar, sidebar, in menupage, in comment section, we need this user data everywhere
+to handle this problem e need to use Context API / Redux....  we will use Redux
+
+Create new folder redux in src 
+Create new file userSlice.js, lets create redux toolkit
+
+npm install @reduxjs/toolkit react-redux
+
+we have created all functions like loginSuccess, loginFailure in userSlice.js , now we have to use them.
+
+create new file store.js
+
+in index.js wrap in <provider store={store}>, by this we can use store in any page any component anywhere, import store and provider.
+some code in store etc. 
+
+now use useSelector in Navbar.jsx
+
+in navbar.js, currentUser?  for functionality of show signin button or user profile image
+also do this with sidebar Menu.jsx
+
+create videoSlice.js
+
+
+now when we sigin its signin but whn we refresh the page its gone, we need to persist our user
+npm install redux-persist
+
+after code of all persistantuser and persistantgate etc now test the app, after refresh it persist th user.
+now it means we have successfully logedin, and on click on subscription we can see our subscription videos
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+now come to signin with google
+go to firebase.google.com > create project > name project > no analytics > build > authentication > google > enable > choose email address  > save.
+
+now we can use google authentication, we need to install google firebase
+npm install firebase
+
+create new file firebase.js
+
+goto server>
+
+now lets work in Video.jsx to fetch video 
+
+also now work for like and dislike buttons
+and now subscribe button
+
+they are working.
+ --------------------------------------------------------------------------------------------------
+
+
+ now come to video, till now we are displaying real youtube video, we delete the iframe and write videoFrame
+
+ now for comments,even after working functionality for comments, comments is not shhowing XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+ moving forward to upload
+ create file Upload.jsx, UI is ready of upload page 
+ now come to firebase > storage > set start > test mode > done
+ work in Upload.jsx , now we can upload video also, 
+ there is a problem then videoFrame is getting over on all elementts XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+
+ now come to recommendation section
+ reate new file Recommendation.jsx
+
+ remove recommendation div
+ now tag related videos are showing up in recommendation side
+
+ now we will implement search functionlity
+
+create new file Search.jsx 
+
+
+All is now working..
+comment, logout, light theme enhancement, upload video not popup are pending.
+
+
+

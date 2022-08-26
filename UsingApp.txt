@@ -1,0 +1,20 @@
+Clone repo
+
+make .env file in both folder (client, server):
+
+client :
+APIKEY=""
+AUTHDOMAIN=""
+PROJECTID=""
+STORAGEBUCKET=""
+MESSAGINGSENDERID=""
+APPID=""
+
+server :
+MONGO = 
+JWT = ""
+
+-----------------------------------------------------
+
+(client)> npm start 
+(server)> npm start
